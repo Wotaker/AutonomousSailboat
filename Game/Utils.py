@@ -2,6 +2,7 @@ import cv2
 import pygame
 from pygame import transform
 from pygame.sprite import Sprite
+from pygame.locals import *
 
 
 class Buoy(Sprite):
@@ -37,6 +38,22 @@ class Wind:
         self.angle = angle % 360    # wind direction in degrees
         self.speed = speed
         self.rect = self.surf.get_rect()
+
+    def manuallyChange(self):
+        """
+        Controls wind with W, A, S, D keys
+        :return: Nan
+        """
+        unit = 0.2
+        pressed_keys = pygame.key.get_pressed()
+        if pressed_keys[K_a]:
+            self.angle = (self.angle + 5) % 360
+        elif pressed_keys[K_d]:
+            self.angle = (self.angle - 5) % 360
+        if pressed_keys[K_w]:
+            self.speed += unit
+        elif pressed_keys[K_s] and self.speed >= unit:
+            self.speed -= unit
 
     def draw(self, surface):
         blitRotateCenter(surface, self.image, (10, 10), self.angle)
