@@ -18,15 +18,16 @@ FramePerSecond = pygame.time.Clock()
 colors = {
     "white": (255, 255, 255),
     "black": (0, 0, 0),
-    "green": (0, 200, 0)
+    "green": (0, 200, 0),
+    "gray": (115, 115, 115)
 }
 font = pygame.font.Font('freesansbold.ttf', 32)
 # pause_text = pygame.font.SysFont('Consolas', 32).render('Pause', True, pygame.color.Color('White'))
 
 
 # Setup a display
-SCREEN_WIDTH = 500
-SCREEN_HEIGHT = 500
+SCREEN_WIDTH = 600
+SCREEN_HEIGHT = 600
 DISPLAYSURF = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 DISPLAYSURF.fill(colors.get("white"))
 pygame.display.set_caption("Niegocin")
@@ -43,7 +44,7 @@ def gameLoop():
     first_run = True
 
     # Creates new World Environment
-    world = World(SCREEN_WIDTH, SCREEN_HEIGHT, 1)
+    world = World(SCREEN_WIDTH, SCREEN_HEIGHT, 0, 10)
 
     while True:
         # Reacts to occurring events
@@ -54,6 +55,9 @@ def gameLoop():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
                     running = not running
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                world.player_boat.target = pygame.mouse.get_pos()
+                print(f"Heading to: {world.player_boat.target}")
 
         if running:
             # Update state of the world

@@ -3,7 +3,12 @@ import numpy as np
 import pandas as pd
 import scipy as sp
 from scipy.interpolate import CubicSpline
+from scipy.optimize import minimize_scalar
 import matplotlib.pyplot as plt
+
+
+def crop2Dfunc(func, y, minimize=True):
+    return lambda x: (-2 * minimize + 1) * func(x, y)
 
 
 def interpolateRbf(data_frame):
@@ -156,11 +161,12 @@ def interpolate2D(data_frame, smooth=5):
 
 
 if __name__ == '__main__':
-    polar_df = pd.read_csv("SailboatData/polar_data_ext.csv")
+    polar_df = pd.read_csv("SailboatData/polar_data_2.csv")
+    wind_speed = 8
 
     # Rbf interpolation:
     rbfInt = interpolateRbf(polar_df)
-    testInterpolation(rbfInt, 2, False)
+    testInterpolation(rbfInt, wind_speed, False)
 
     plot2DInterpolation(
         rbfInt,
@@ -169,6 +175,11 @@ if __name__ == '__main__':
         vrange=(0, 10),
         type='rbf'
     )
+
+    rbf_wind = crop2Dfunc(interpolateRbf(polar_df), wind_speed)
+    result = minimize_scalar(rbf_wind, bounds=(0, 360), method='Bounded')
+
+    print(f"angle: {result.x}, speed: {-rbf_wind(result.x)}")
 
 
 

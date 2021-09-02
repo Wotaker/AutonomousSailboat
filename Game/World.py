@@ -1,36 +1,40 @@
 from Utils import Wind, Buoy
 from Boat import Boat
+from Interpolations import interpolateRbf
 
 import random
 import pygame
 from pygame.sprite import Sprite
+import pandas as pd
 
 random.seed(420)
 
 
 class World(Sprite):
 
-    wind = Wind(random.randint(0, 360), 1)
+    wind = Wind(0, 6)
     buoys = pygame.sprite.Group()
     fleet = pygame.sprite.Group()
 
-    def __init__(self, width, height, no_competitors, no_buoys=4):
+    def __init__(self, width, height, no_competitors, no_buoys=2):
         super().__init__()
         self.width = width
         self.height = height
         self.track_locations = (
             random.randint(0, width // 3),
-            random.randint(2 * height // 3, height),
-            random.randint(2 * width // 3, width),
+            random.randint(2 * height // 3, height - 20),
+            random.randint(2 * width // 3, width - 20),
             random.randint(0, height // 3),
         )
 
         # Adding Boats
+        speedFunction = interpolateRbf(pd.read_csv("SailboatData/polar_data_2.csv"))
         self.player_boat = Boat(
             self,
             self.track_locations[0],
             self.track_locations[1] + 10,
             0,
+            speedFunction,
             True
         )
         self.fleet.add(self.player_boat)
@@ -40,6 +44,7 @@ class World(Sprite):
                 self.track_locations[0] + 20,
                 self.track_locations[1] + 10,
                 30,
+                speedFunction,
                 False
             ))
 

@@ -23,19 +23,23 @@ class Buoy(Sprite):
         self.y_coord = y_coord
         self.rect = self.surf.get_rect()
         self.rect.update(self.x_coord, self.y_coord, self.pxl_size, self.pxl_size)
+        self.print()
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
+
+    def print(self):
+        print(f"New Buoy of type {self.type} at location {(self.x_coord, self.y_coord)}")
 
 
 class Wind:
 
     pxl_size = 50       # Size of wind arrow in pixels
-    image = pygame.image.load("Images/arrow1.png")
+    image = pygame.image.load("Images/arrow_trans.png")
     surf = pygame.Surface((pxl_size, pxl_size))
 
     def __init__(self, angle, speed):
-        self.angle = angle % 360    # wind direction in degrees
+        self.angle = angle % 360    # wind angle in degrees
         self.speed = speed
         self.rect = self.surf.get_rect()
 
@@ -44,10 +48,11 @@ class Wind:
         Controls wind with W, A, S, D keys
         :return: Nan
         """
-        unit = 0.2
+        unit = 1
         pressed_keys = pygame.key.get_pressed()
         if pressed_keys[K_a]:
             self.angle = (self.angle + 5) % 360
+            # print(f"WIND (dir, speed) = ({self.angle}, {self.speed})")
         elif pressed_keys[K_d]:
             self.angle = (self.angle - 5) % 360
         if pressed_keys[K_w]:
