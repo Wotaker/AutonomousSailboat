@@ -4,6 +4,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import math
 import cmath
+
+import pygame.font
 import scipy.optimize
 from scipy.stats import norm
 
@@ -19,5 +21,5 @@ def angle_diff(minuend, subtrahend):
 
 
 if __name__ == '__main__':
-    print([sgn(x) for x in [-3, -2, -1, 2, 34]])
+    print(pygame.font.get_fonts())
 

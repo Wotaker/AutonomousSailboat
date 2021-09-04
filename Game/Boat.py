@@ -18,18 +18,19 @@ def sgn(x):
 
 
 class Boat(Sprite):
-
-    pxl_size = 20           # Boat size in pixels
+    pxl_size = 20  # Boat size in pixels
     speedFunction = interpolateRbf(pd.read_csv("SailboatData/polar_data_1.csv"))
-    velocity = 0            # boat speed (relative to water)
-    velocity_moderator = 0.25     # speed multiplier constant
     rudder_step = 5
     dead_angle = 30
     tack_angle = 15
+    target_reset_distance = 5
+    buoy_idx = 1
+    velocity = 0  # boat speed (relative to water)
+    velocity_moderator = 0.4  # speed multiplier constant
     surf = pygame.Surface((pxl_size, pxl_size))
     rect = surf.get_rect()
 
-    def __init__(self, world, x_coord, y_coord, angle,  player=False):
+    def __init__(self, world, x_coord, y_coord, angle, player=False):
         super().__init__()
         self.world = world
         self.x_coord = x_coord
@@ -41,32 +42,49 @@ class Boat(Sprite):
             self.image = pygame.image.load("Images/sailboat_trans_blue.png")
         else:
             self.image = pygame.image.load("Images/sailboat_green.png")
+            self.target = self.world.buoys_dict[self.buoy_idx].get_coords()
         self.rect.update(self.x_coord, self.y_coord, self.pxl_size, self.pxl_size)
+
+    @staticmethod
+    def angle_diff(minuend, subtrahend):
+        return ((180 - (subtrahend - minuend)) % 360) - 180
+
+    @staticmethod
+    def distance_diff(x, y):
+        return math.sqrt((x[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2)
 
     def move(self):
         """
         moves the boat in reaction to keyboard events (left and right keys) if player, or autonomously otherwise
         :return: Nan
         """
-        if self.player:
+        if self.player:     # Players' boat code block
             pressed_keys = pygame.key.get_pressed()
             if pressed_keys[K_LEFT]:
+                self.target = None
                 self.angle = (self.angle + self.rudder_step) % 360
-                # print(f"BOAT (dir, speed) = ({self.angle}, {self.velocity})")
             elif pressed_keys[K_RIGHT]:
+                self.target = None
                 self.angle = (self.angle - self.rudder_step) % 360
-            elif self.target is not None:
-                self.moveAutonomously()
+            elif self.target:
+                self.correctCourse()
+                if self.distance_diff(self.target, (self.x_coord, self.y_coord)) < self.target_reset_distance:
+                    self.target = None
+        elif self.target:   # Autopilots' code block
+            self.correctCourse()
+            if self.distance_diff(self.target, (self.x_coord, self.y_coord)) < self.target_reset_distance:
+                if self.buoy_idx < self.world.no_buoys - 1:
+                    self.buoy_idx += 1
+                    self.target = self.world.buoys_dict[self.buoy_idx].get_coords()
+                else:
+                    self.target = None
+
         self.update_velocity()
         self.x_coord -= self.velocity * math.sin(math.radians(self.angle)) * self.velocity_moderator
         self.x_coord %= self.world.width
         self.y_coord -= self.velocity * math.cos(math.radians(self.angle)) * self.velocity_moderator
         self.y_coord %= self.world.height
         self.rect.update(self.x_coord, self.y_coord, self.pxl_size, self.pxl_size)
-
-    @staticmethod
-    def angle_diff(minuend, subtrahend):
-        return ((180 - (subtrahend - minuend)) % 360) - 180
 
     def optimalCourse(self, plot=False):
         """
@@ -75,9 +93,9 @@ class Boat(Sprite):
         :return: the optimal absolute angel
         """
         wind_speed = self.world.wind.speed
-        w = self.world.wind.angle       # wind angle
+        w = self.world.wind.angle  # wind angle
         x_p, y_p = self.target[0] - self.x_coord, self.target[1] - self.y_coord
-        b = (-math.degrees(cmath.polar(complex(x_p, y_p))[1]) - 90) % 360   # target angle
+        b = (-math.degrees(cmath.polar(complex(x_p, y_p))[1]) - 90) % 360  # target angle
         a = self.angle_diff(b, w) % 360
 
         def velocity_P(x):
@@ -87,36 +105,22 @@ class Boat(Sprite):
             else:
                 return 0
 
-        if random.random() > 0.95:
-            print(f"Target: {self.target}, Beta: {b}, Alfa: {a}")
-
+        # if random.random() > 0.95:
+        #     print(f"Target: {self.target}, Beta: {b}, Alfa: {a}")
         if plot:
             plotFunc(velocity_P, np.linspace(0, 360, 360), f"Velocity in P direction, wind={wind_speed}")
 
-        # if a < self.tack_angle or a > 360 - self.tack_angle:
-        #     return self.angle
-        # else:
-        #     optimised = minimize_scalar(velocity_P, bounds=(0, 360), method='Bounded')
-        #     optimised_angle_relative = optimised.x              # optimal angle relative to wind
-        #     return w + optimised_angle_relative                 # optimal absolute angle
-
-        # optimised = minimize_scalar(velocity_P, bounds=(0, 360), method='Bounded')
-        # optimised_angle_relative = optimised.x  # optimal angle relative to wind
-        # return w + optimised_angle_relative  # optimal absolute angle
-
+        bounds = (0, 360)
         if a < self.tack_angle or a > 360 - self.tack_angle:
             if self.angle_diff(self.angle, w) < 0:
-                optimised = minimize_scalar(velocity_P, bounds=(270, 360), method='Bounded')
-                optimised_angle_relative = optimised.x              # optimal angle relative to wind
+                bounds = (270, 360)
             else:
-                optimised = minimize_scalar(velocity_P, bounds=(0, 90), method='Bounded')
-                optimised_angle_relative = optimised.x
-        else:
-            optimised = minimize_scalar(velocity_P, bounds=(0, 360), method='Bounded')
-            optimised_angle_relative = optimised.x              # optimal angle relative to wind
-        return w + optimised_angle_relative  # optimal absolute angle
+                bounds = (0, 90)
 
-    def moveAutonomously(self):
+        optimised_angle_wind = minimize_scalar(velocity_P, bounds=bounds, method='Bounded').x
+        return w + optimised_angle_wind
+
+    def correctCourse(self):
         optimal_course = self.optimalCourse()
         delta = self.angle_diff(optimal_course, self.angle)
         if delta > 0 and delta > self.rudder_step:
@@ -142,3 +146,5 @@ class Boat(Sprite):
 
     def draw(self, surface):
         blitRotateCenter(surface, self.image, (self.x_coord, self.y_coord), self.angle)
+        if self.target:
+            self.world.drawTarget(self.world.screen, self.target)

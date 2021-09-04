@@ -1,4 +1,5 @@
 from World import World
+from Utils import generateText
 
 import pygame
 import sys
@@ -21,8 +22,6 @@ colors = {
     "green": (0, 200, 0),
     "gray": (115, 115, 115)
 }
-font = pygame.font.Font('freesansbold.ttf', 32)
-# pause_text = pygame.font.SysFont('Consolas', 32).render('Pause', True, pygame.color.Color('White'))
 
 
 # Setup a display
@@ -32,19 +31,16 @@ DISPLAYSURF = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 DISPLAYSURF.fill(colors.get("white"))
 pygame.display.set_caption("Niegocin")
 
-# Setup pause screen
-pause_text = font.render('Press P to Start or Pause', True, colors["black"], colors["white"])
-pause_rect = pause_text.get_rect()
-pause_rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
-
 
 def gameLoop():
 
     running = True
-    first_run = True
 
     # Creates new World Environment
-    world = World(SCREEN_WIDTH, SCREEN_HEIGHT, 0, 10)
+    world = World(DISPLAYSURF, 1, 10)
+    world.draw(DISPLAYSURF)
+    pygame.display.update()
+    world.startCountdown()
 
     while True:
         # Reacts to occurring events
@@ -59,7 +55,7 @@ def gameLoop():
                     world.player_boat.optimalCourse(plot=True)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 world.player_boat.target = pygame.mouse.get_pos()
-                print(f"Heading to: {world.player_boat.target}")
+                # print(f"Heading to: {world.player_boat.target}")
 
         if running:
             # Update state of the world
@@ -70,11 +66,14 @@ def gameLoop():
             DISPLAYSURF.fill(colors.get("white"))
             world.draw(DISPLAYSURF)
             pygame.display.update()
-            if first_run:
-                running = False
-                first_run = False
+
         else:
-            DISPLAYSURF.blit(pause_text, pause_rect)
+            DISPLAYSURF.blit(*generateText(
+                'Press P to Start or Pause',
+                'freesansbold.ttf',
+                32,
+                (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2),
+            ))
             pygame.display.update()
 
         FramePerSecond.tick(FPS)
