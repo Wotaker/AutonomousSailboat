@@ -5,8 +5,6 @@ import random
 import pygame
 from pygame.sprite import Sprite
 
-random.seed(420)
-
 
 class World(Sprite):
 

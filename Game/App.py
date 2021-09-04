@@ -8,7 +8,6 @@ from pygame.locals import *
 
 
 # Initialize program
-random.seed(420)
 pygame.init()
 
 # Controls the refresh speed
@@ -37,7 +36,7 @@ def gameLoop():
     running = True
 
     # Creates new World Environment
-    world = World(DISPLAYSURF, 1, 10)
+    world = World(DISPLAYSURF, 1, 5)
     world.draw(DISPLAYSURF)
     pygame.display.update()
     world.startCountdown()
