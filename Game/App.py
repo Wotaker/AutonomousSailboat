@@ -55,6 +55,8 @@ def gameLoop():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
                     running = not running
+                elif event.key == pygame.K_v:
+                    world.player_boat.optimalCourse(plot=True)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 world.player_boat.target = pygame.mouse.get_pos()
                 print(f"Heading to: {world.player_boat.target}")

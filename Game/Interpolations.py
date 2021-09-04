@@ -7,8 +7,13 @@ from scipy.optimize import minimize_scalar
 import matplotlib.pyplot as plt
 
 
-def crop2Dfunc(func, y, minimize=True):
-    return lambda x: (-2 * minimize + 1) * func(x, y)
+def plotFunc(func, xs, title=None):
+    fig, ax = plt.subplots()
+    ys = np.array([func(x) for x in xs])
+    ax.plot(xs, ys)
+    if title:
+        plt.title(title)
+    plt.show()
 
 
 def interpolateRbf(data_frame):
@@ -160,8 +165,12 @@ def interpolate2D(data_frame, smooth=5):
     return sp.interpolate.bisplrep(ang, wind, z, s=smooth)
 
 
+def crop2Dfunc(func, y, minimize=True):
+    return lambda x: (-2 * minimize + 1) * func(x, y)
+
+
 if __name__ == '__main__':
-    polar_df = pd.read_csv("SailboatData/polar_data_2.csv")
+    polar_df = pd.read_csv("SailboatData/polar_data_1.csv")
     wind_speed = 8
 
     # Rbf interpolation:
@@ -172,7 +181,7 @@ if __name__ == '__main__':
         rbfInt,
         np.linspace(0., 360, 360),
         np.linspace(0., 20., 100),
-        vrange=(0, 10),
+        vrange=(-2, 10),
         type='rbf'
     )
 

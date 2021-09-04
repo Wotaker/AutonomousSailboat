@@ -28,13 +28,11 @@ class World(Sprite):
         )
 
         # Adding Boats
-        speedFunction = interpolateRbf(pd.read_csv("SailboatData/polar_data_2.csv"))
         self.player_boat = Boat(
             self,
             self.track_locations[0],
             self.track_locations[1] + 10,
             0,
-            speedFunction,
             True
         )
         self.fleet.add(self.player_boat)
@@ -44,7 +42,6 @@ class World(Sprite):
                 self.track_locations[0] + 20,
                 self.track_locations[1] + 10,
                 30,
-                speedFunction,
                 False
             ))
 

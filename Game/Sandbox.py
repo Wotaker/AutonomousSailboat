@@ -1,16 +1,23 @@
 import numpy as np
-import scipy as sp
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import math
 import cmath
 import scipy.optimize
+from scipy.stats import norm
 
-from Interpolations import interpolateRbf, crop2Dfunc
+from Interpolations import plotFunc
+
+
+def sgn(x):
+    return 2 * (x > 0) - 1
+
+
+def angle_diff(minuend, subtrahend):
+    return ((180 - (subtrahend - minuend)) % 360) - 180
 
 
 if __name__ == '__main__':
-    polar_df = pd.read_csv("SailboatData/polar_data_1.csv")
-    print(math.cos(math.radians(-720 + 60)))
-    print(math.degrees(cmath.polar(complex(-3, -2))[1]))
+    print([sgn(x) for x in [-3, -2, -1, 2, 34]])
 
