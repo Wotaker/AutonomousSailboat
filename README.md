@@ -5,7 +5,8 @@ Creating software for an Autonomus Sailboat that includes:
 * Navigation
 * Servomotors controller
 * Central managment unit
-More details in the [.docx document](http://google.com)
+
+More details in the [document](https://github.com/Wotaker/AutonomousSailboat/blob/master/Project%20Overview.pdf)
 
 ### Setup
 0. Using conda (Miniconda)
