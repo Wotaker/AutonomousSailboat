@@ -8,6 +8,9 @@ Creating software for an Autonomus Sailboat that includes:
 
 More details in the [document](https://github.com/Wotaker/AutonomousSailboat/blob/master/Project%20Overview.pdf)
 
+### Articles Folder
+This is where articles regarding ASV design and research are stored. Some of them are devided betweem construction and software&hardware folders, while others are more general. Easily the most important one is Biblia ASV where a lot of important ideas are explored.
+
 ### Setup
 0. Using conda (Miniconda)
 1. In cmd change directory to the one with .yml file
