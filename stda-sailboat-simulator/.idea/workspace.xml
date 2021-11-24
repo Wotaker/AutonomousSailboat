@@ -7,14 +7,6 @@
     <list default="true" id="bcf333cb-068c-4881-bbf9-e497c43cb6ff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../Articles/Construction/Airfoil Selection and Wingsail Design for an&#10;Autonomous Sailboat.pdf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Articles/Hardware&amp;Software/Navigation and Control for&#10;an Autonomous Sailing Model Boat.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/figs/angles.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/figs/angles.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/figs/heading.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/figs/heading.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/figs/speeds.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/figs/speeds.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/figs/trajectories.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/figs/trajectories.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/headingController.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/headingController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sdbx.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sdbx.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +96,7 @@
       <option name="presentableId" value="Default" />
       <updated>1637709352125</updated>
       <workItem from="1637709353397" duration="88000" />
-      <workItem from="1637770726712" duration="3852000" />
+      <workItem from="1637770726712" duration="4516000" />
     </task>
     <servers />
   </component>
