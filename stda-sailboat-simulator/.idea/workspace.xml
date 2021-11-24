@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="bcf333cb-068c-4881-bbf9-e497c43cb6ff" name="Changes" comment="" />
+    <list default="true" id="bcf333cb-068c-4881-bbf9-e497c43cb6ff" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Articles/Construction/Airfoil Selection and Wingsail Design for an&#10;Autonomous Sailboat.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Articles/Hardware&amp;Software/Navigation and Control for&#10;an Autonomous Sailing Model Boat.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/figs/angles.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/figs/angles.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/figs/heading.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/figs/heading.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/figs/speeds.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/figs/speeds.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/figs/trajectories.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/figs/trajectories.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/headingController.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/headingController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sdbx.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/sdbx.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="21L99oogDU7dZhySTuJpsJbOroz" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -16,9 +34,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/sdbx.py" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.run">
     <configuration name="run" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="stda-sailboat-simulator" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -41,6 +63,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="sdbx" type="PythonConfigurationType" factoryName="Python">
+      <module name="stda-sailboat-simulator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\wojci\miniconda3\envs\asv2\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/sdbx.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.sdbx" />
+      <item itemvalue="Python.run" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.run" />
@@ -56,6 +104,7 @@
       <option name="presentableId" value="Default" />
       <updated>1637709352125</updated>
       <workItem from="1637709353397" duration="88000" />
+      <workItem from="1637770726712" duration="3852000" />
     </task>
     <servers />
   </component>
@@ -63,6 +112,7 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/stda_sailboat_simulator$run.coverage" NAME="run Coverage Results" MODIFIED="1637709419950" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/stda_sailboat_simulator$run.coverage" NAME="run Coverage Results" MODIFIED="1637773381882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/stda_sailboat_simulator$sdbx.coverage" NAME="sdbx Coverage Results" MODIFIED="1637772556762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>

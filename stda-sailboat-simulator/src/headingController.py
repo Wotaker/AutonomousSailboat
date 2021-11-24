@@ -90,7 +90,7 @@ class HeadingController(object):
 
         return list(K)
 
-    def controll(self, desired_heading, heading, yaw_rate, speed, roll, drift_angle=0):
+    def control(self, desired_heading, heading, yaw_rate, speed, roll, drift_angle=0):
 
         # calculate error, difference and sum of error
         heading_error = desired_heading - heading

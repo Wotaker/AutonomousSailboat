@@ -1,11 +1,9 @@
 import time
+import math
 
-now = time.time()
-print(type(now), int(now))
-time.sleep(5)
-now = time.time()
-print(type(now), int(now))
-a = (3 + 5) - \
-    (5 + 4)
+print(type(27 // 4))
+print(type(int(27 // 4)))
+
+
 
 

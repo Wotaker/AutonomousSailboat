@@ -14,7 +14,7 @@ def main():
     # save=False
 
     scenario_1(save_fig=save_figs)
-    scenario_0(save_fig=save_figs)
+    # scenario_0(save_fig=save_figs)
 
     plt.show()
 
@@ -81,14 +81,14 @@ def scenario_1(save_fig=False):
     N_steps = int(t_end / sample_time)
     # initial values
     x0 = zeros(n_states)
-    x0[VEL_X] = 0.
+    x0[VEL_X] = 0.  # po co to jeśli wcześniej zeros()???
 
     if actor_dynamics:
         x0[SAIL_STATE] = 48 * pi / 180
 
     x, t, r, sail, ref_heading = init_data_arrays(n_states, N_steps, x0)
 
-    if True:
+    if True:        # Po chuj to???
         x2, t2, r2, sail2, ref_heading = init_data_arrays(n_states, N_steps, x0)
 
     integrator, controller = init_integrator(x0, sample_time)
@@ -101,16 +101,9 @@ def scenario_1(save_fig=False):
     # controller2.KI = controller2.KI /100
     # controller2.calculate_controller_params(YAW_TIMECONSTANT, Q=diag([1E-1, 1, 5]), r=ones((1,1))*1000)
 
-    # reference trajectory heading    
-
-    # ref_heading[:int(30/sample_time)] = -.2*pi*0
-
-    ref_heading[int(40 / sample_time):] = 1.2 * pi
-
-    # ref_heading[int(30/sample_time):int(33/sample_time)] = 0.8*pi
-    # ref_heading[int(30/sample_time):] = .9*pi
-
-    ref_heading[int(90 / sample_time):] = .35 * pi
+    ref_heading[:] = math.radians(0)
+    ref_heading[int(50 / sample_time):] = math.radians(100)
+    ref_heading[int(100 / sample_time):] = math.radians(60)
 
     # ref_heading = smooth_reference(ref_heading, int(5/sample_time))
 
@@ -140,10 +133,10 @@ def scenario_1(save_fig=False):
     x, t, separation, keel, sail_force, sail, r = simulate(N_steps, x, t, r, sail, environment, controller,
                                                            integrator, sample_time, sail_sampletime, ref_heading, wind,
                                                            sail_angle)
-    x2, t2, separation2, keel2, sail_force2, sail2, r2 = simulate(N_steps, x2, t2, r2, sail, environment, controller,
-                                                                  integrator2, sample_time, sail_sampletime,
-                                                                  ref_heading,
-                                                                  wind, sail_angle)
+    # x2, t2, separation2, keel2, sail_force2, sail2, r2 = simulate(N_steps, x2, t2, r2, sail, environment, controller,
+    #                                                               integrator2, sample_time, sail_sampletime,
+    #                                                               ref_heading,
+    #                                                               wind, sail_angle)
 
     # comp_route(x, x2)
 
@@ -330,8 +323,8 @@ def simulate(
         # rudder_angle calculation
         speed = sqrt(x[VEL_X, i] ** 2 + x[VEL_Y, i] ** 2)
         drift = arctan2(x[VEL_Y, i], x[VEL_X, i])
-        env[RUDDER_ANGLE] = controller.controll(ref_heading[i], x[YAW, i], x[YAW_RATE, i], speed, x[ROLL, i],
-                                                drift_angle=drift)
+        env[RUDDER_ANGLE] = controller.control(ref_heading[i], x[YAW, i], x[YAW_RATE, i], speed, x[ROLL, i],
+                                               drift_angle=drift)
         # if t[i] < 80:
         r[i] = env[RUDDER_ANGLE]
         # else:
