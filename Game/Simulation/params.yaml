@@ -1,0 +1,23 @@
+boat: {
+  drift_coef        : 0.03, #[]
+  tan_friction      : 40, #[kgs^-1]
+  ang_friction      : 6000, #[kgm]
+  sail_lift         : 200, #[kgs^-1]
+  rudder_lift       : 1500, #[kgs^-1]
+  dist_to_sail      : 0.5, #[m]
+  dist_to_mast      : 0.5, #[m]
+  dist_to_rudder    : 2, #[m]
+  mass              : 300, #[kg]
+  moi               : 400, #[kgm^2]
+  rudder_break_coef : 0.2  #[]
+
+}
+
+environment: {
+  true_wind_angle   : 0 , #[rad]
+  true_wind_speed   : 2  #[m/s]
+} 
+
+simulation: {
+  simulation_step   : 0.1 #[s]
+}

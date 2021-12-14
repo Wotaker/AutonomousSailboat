@@ -59,7 +59,7 @@ class World(Sprite):
             True
         )
         self.fleet.add(self.player_boat)
-        for comp in range(no_competitors):
+        for _ in range(no_competitors):
             self.fleet.add(Boat(
                 self,
                 self.track_locations[0] + 20,
@@ -80,8 +80,8 @@ class World(Sprite):
         self.wind.angle = direction
         self.wind.speed = speed
 
-    def startCountdown(self):
-        for sec in range(3, 0, -1):
+    def startCountdown(self, start):
+        for sec in range(start, 0, -1):
             self.screen.blit(*generateText(
                 str(sec),
                 'freesansbold.ttf',

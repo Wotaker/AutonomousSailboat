@@ -45,7 +45,7 @@ class Wind:
         self.angle = angle % 360    # wind angle in degrees
         self.speed = speed
 
-    def manuallyChange(self):
+    def keyboardChange(self):
         """
         Controls wind with W, A, S, D keys
         :return: Nan
